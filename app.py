@@ -25,16 +25,15 @@ with col2:
  Product_Name=st.selectbox("Product_Name",["Smartphone","Yoga Mat","T-Shirt","Lipstick","Coffee Maker"])
  Product_Category=st.selectbox("Product_Category",["Clothing ","Electronics","Sports","Beauty","Home & Kitchen"])
 
-
-input=pd.DataFrame({
-    "quantity_sold":[quantity_sold],
-    "Unit_Price":[Unit_Price],
-    "Customer_Age":[Customer_Age],
-    "Review_Rating":[Review_Rating],
-    "Shipping_Cost":[Shipping_Cost],
-    "Profit_Margin":[Profit_Margin],
-    "Product_Name":[Product_Name],
-    "Product_Category":[Product_Category],
+input = pd.DataFrame({
+    "Quantity Sold": [quantity_sold],
+    "Unit Price": [Unit_Price],
+    "Customer Age": [Customer_Age],
+    "Review Rating": [Review_Rating],
+    "Shipping Cost": [Shipping_Cost],
+    "Profit Margin": [Profit_Margin],
+    "Product Name": [Product_Name],
+    "Product Category": [Product_Category]
 })
 
 st.subheader("Model Performance")
@@ -45,18 +44,21 @@ with col3:st.metric("RMSE",182.9)
 
 st.divider()
 
-input_encode=pd.get_dummies(input[["Product_Name","Product_Category"]])
-input_final=pd.concat([input[["quantity_sold","Unit_Price",
-                              "Customer_Age","Review_Rating",
-                              "Shipping_Cost","Profit_Margin"]],input_encode],axis=1)
+input_encode=pd.get_dummies(input[["Product Name","Product Category"]])
+input_final = pd.concat(
+    [input[[
+                "Quantity Sold",
+                "Unit Price",
+                "Customer Age",
+                "Review Rating",
+                "Shipping Cost",
+                "Profit Margin" 
+                ]],input_encode],axis=1)
 input_final=input_final.reindex(columns=feature_names,fill_value=0)
 input_scaler=scaler.transform(input_final)
 if st.button("Predict Discounted Price"):
-    predict=model.predict(input_scaler)[0]
-    st.info("💡 Busniss Insight" \
-    "The Model estimates the expected discounted prices based on" \
-    " the product, customer and sales characterstics provided")
-    st.success(f"🎯 Predicted Discounted Price : ₹{predict :.2f}")
+  predict=model.predict(input_scaler)[0]
+  st.info("💡 Busniss Insight The Model estimates the expected discounted prices based on the product, customer and sales characterstics provided")
+  st.success(f"🎯 Predicted Discounted Price : ₹{predict :.2f}")
 st.write("Built with Python, Scikit-learn & Streamlit")
 
-  
