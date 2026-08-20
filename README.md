@@ -1,4 +1,7 @@
 # E-Commerce Sales Prediction
+## 🌐 Live Demo
+
+[  🤖E-Commerce Sales  Prediction App](https://e-commerce-sales-predict.streamlit.app/)
 
 ![E-Commerce Sales Prediction-app input](./sales1.png)
 ![E-Commerce Sales Prediction-app output](./sales2.png)
